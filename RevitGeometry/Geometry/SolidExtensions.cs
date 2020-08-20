@@ -146,5 +146,14 @@ namespace RevitGeometry.Geometry
         {
             return solid.GetFaces().Where(x => predicate.Invoke(x));
         }
+
+        public static BoundingBoxXYZ GetBoxAroundPoint(XYZ origin)
+        {
+            XYZ one = new XYZ(.1, .1, .1);
+            var min = origin - one;
+            var max = origin + one;
+            BoundingBoxXYZ boundingBoxXYZ = new BoundingBoxXYZ { Min = min, Max = max };
+            return boundingBoxXYZ;
+        }
     }
 }

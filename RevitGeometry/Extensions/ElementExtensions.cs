@@ -13,8 +13,8 @@ namespace RevitGeometry.Extensions
         public static void SetMaterial(this Element element, ElementId materialId)
         {
             Document doc = element.Document;
-            GeometryElement geometryElements = element.get_Geometry(GeometryOptions.Options);
-            foreach (Solid solid in geometryElements.GetAllSolids())
+            var solids = element.GetGeometry();
+            foreach (Solid solid in solids)
             {
                 foreach (Face face in solid.GetFaces())
                     doc.Paint(element.Id, face, materialId);

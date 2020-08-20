@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace RevitGeometry.Selection
 {
-    class SelectionFilter : ISelectionFilter
+    public class SelectionFilter : ISelectionFilter
     {
-        public SelectionFilter(Func<Element, bool> allowElementCondition
-            , Func<Reference, XYZ, bool> allowReferenceCondition)
+        public SelectionFilter(Func<Element, bool> allowElementCondition = null
+            , Func<Reference, XYZ, bool> allowReferenceCondition = null)
         {
-            AllowElementCondition = allowElementCondition;
-            AllowReferenceCondition = allowReferenceCondition;
+            AllowElementCondition = allowElementCondition ?? (_ => true);
+            AllowReferenceCondition = allowReferenceCondition ?? ((x1, x2) => true);
         }
 
         private Func<Element, bool> AllowElementCondition { get; }
